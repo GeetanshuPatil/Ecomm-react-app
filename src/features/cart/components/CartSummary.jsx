@@ -24,7 +24,7 @@ const CartSummary = () => {
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col gap-5 lg:sticky lg:top-20">
+    <div className="bg-white border border-gray-200 rounded-2xl p-5 flex flex-col gap-5 lg:sticky lg:top-24">
       {/* HEADER */}
       <div className="flex items-center justify-between">
         <h2 className="text-base font-semibold text-gray-900">

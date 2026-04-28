@@ -14,23 +14,25 @@ const items = useSelector(selectCartItems) || [];
   }
 
   return (
-    <div className="grid lg:grid-cols-3 gap-8">
-  <div className="p-6">
-      <BackButton />
-  {/* LEFT: Items */}
-  <div className="lg:col-span-2 flex flex-col gap-4">
-    {items.map((item) => (
-      <CartItem key={item.id} item={item} />
-    ))}
-  </div>
+     <div className="p-6">
+    <BackButton />
 
-  {/* RIGHT: Summary */}
-  <div>
-    <CartSummary />
-  </div>
+    <div className="grid lg:grid-cols-3 gap-8 mt-4">
+      
+      {/* LEFT: Items */}
+      <div className="lg:col-span-2 flex flex-col gap-4">
+        {items.map((item) => (
+          <CartItem key={item.id} item={item} />
+        ))}
+      </div>
 
-</div>
-</div>
+      {/* RIGHT: Summary */}
+      <div>
+        <CartSummary />
+      </div>
+
+    </div>
+  </div>
   );
 };
 

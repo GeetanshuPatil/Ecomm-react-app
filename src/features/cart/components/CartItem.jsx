@@ -37,7 +37,7 @@ const CartItem = ({ item }) => {
       </div>
 
       {/* RIGHT SIDE (merged center + right for better layout) */}
-      <div className="flex items-center justify-between sm:justify-end gap-6 w-full sm:w-auto">
+      <div className="flex items-center justify-between sm:justify-end gap-4 w-full sm:w-auto">
         {/* Quantity */}
         <div className="flex items-center border border-gray-300 rounded-xl overflow-hidden">
           <button
@@ -61,12 +61,9 @@ const CartItem = ({ item }) => {
           >
             +
           </button>
+       
         </div>
 
-        {/* Price */}
-        <span className="text-sm font-semibold text-gray-900 min-w-[70px] text-right">
-          {formatINR(convertToINR(item.price * item.quantity))}
-        </span>
 
         {/* Remove */}
         <button
