@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
 import { selectCartTotal } from "../../cart/cartSelectors";
 import { selectIsAuthenticated } from "../../auth/authSelectors";
+import BackButton from "../../../shared/components/BackButton";
 
 const PaymentPortal = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -21,6 +22,8 @@ const PaymentPortal = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-6">
+      <div className="p-6">
+      <BackButton />
 
       {/* Title */}
       <h1 className="text-2xl font-semibold mb-6">
@@ -78,6 +81,7 @@ const PaymentPortal = () => {
         Place Order (Cash on Delivery)
       </button>
 
+    </div>
     </div>
   );
 };

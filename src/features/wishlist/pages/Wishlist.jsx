@@ -4,6 +4,10 @@ import { removeFromWishlist } from "../wishlistSlice";
 import { Link } from "react-router-dom";
 import { addToCart } from "../../cart/cartSlice";
 import { convertToINR, formatINR } from "../../../shared/utils/currency";
+import BackButton from "../../../shared/components/BackButton";
+import toast from "react-hot-toast";
+
+
 
 const Wishlist = () => {
   const items = useSelector(selectWishlistItems);
@@ -15,6 +19,8 @@ const Wishlist = () => {
 
   return (
     <div className="max-w-5xl mx-auto p-6">
+      <div className="p-6">
+      <BackButton />
       <h1 className="text-xl font-semibold mb-6">My Wishlist</h1>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -34,21 +40,27 @@ const Wishlist = () => {
             </p>
 
             <button
-              onClick={() => dispatch(removeFromWishlist(item.id))}
+              onClick={() => {dispatch(removeFromWishlist(item.id))
+                toast("Removed from wishlist");
+              }}
               className="mt-3 text-sm text-red-500 hover:underline"
+
             >
               Remove
             </button>
 
             <button
-              onClick={() => dispatch(addToCart(item))}
+              onClick={() => {dispatch(addToCart(item))
+                toast.success("Added to cart ");
+              }}
               className="mt-3 w-full py-2 rounded-xl bg-black text-white text-sm hover:bg-gray-800 transition"
             >
-              🛒 Add to Cart
+               Add to Cart
             </button>
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

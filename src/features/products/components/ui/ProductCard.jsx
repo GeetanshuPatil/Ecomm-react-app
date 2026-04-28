@@ -6,7 +6,9 @@ import {
   addToWishlist,
   removeFromWishlist,
 } from "../../../wishlist/wishlistSlice";
-import {convertToINR, formatINR } from "../../../../shared/utils/currency";
+import { convertToINR, formatINR } from "../../../../shared/utils/currency";
+import toast from "react-hot-toast";
+
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
@@ -23,13 +25,15 @@ const ProductCard = ({ product }) => {
 
           if (isWishlisted) {
             dispatch(removeFromWishlist(product.id));
+             toast("Removed from wishlist ❌");
           } else {
             dispatch(addToWishlist(product));
+             toast.success("Added to wishlist ");
           }
         }}
         className="absolute top-2 right-2 text-xl"
       >
-        {isWishlisted ? "❤️" : "🤍"}
+        {isWishlisted ? "♥️" : "🤍"}
       </button>
 
       {/* CLICKABLE AREA ONLY FOR NAVIGATION */}
@@ -37,8 +41,13 @@ const ProductCard = ({ product }) => {
         onClick={() => navigate(`/product/${product.id}`)}
         className="cursor-pointer pb-2"
       >
-        <img src={product.thumbnail} className="h-40 w-full object-cover" />
-        <h2 className="text-sm font-medium mt-2">{product.title}</h2>
+        <div className="h-32 flex items-center justify-center bg-gray-50 rounded-xl">
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+            className="max-h-28 object-contain"
+          />
+        </div>
         <p className="text-sm font-semibold">
           {formatINR(convertToINR(product.price))}
         </p>{" "}
@@ -49,6 +58,7 @@ const ProductCard = ({ product }) => {
         onClick={(e) => {
           e.stopPropagation(); // ✅ keep your logic
           dispatch(addToCart(product));
+           toast.success("Added to cart ");
         }}
         className="mt-2 w-full py-2 rounded-xl bg-black text-white text-sm 
                  hover:bg-gray-800 transition"

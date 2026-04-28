@@ -12,7 +12,7 @@ const ProductList = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-xl font-semibold text-gray-900">Products</h1>
+      {/* <h1 className="text-xl font-semibold text-gray-900">Products</h1> */}
 
       <ProductFilters />
 

@@ -1,7 +1,12 @@
 // features/cart/components/CartItem.jsx
-
+import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { removeFromCart, increaseQty, decreaseQty } from "../cartSlice";
+import {
+  removeFromCart,
+  increaseQty,
+  decreaseQty,
+  clearCart,
+} from "../cartSlice";
 import { convertToINR, formatINR } from "../../../shared/utils/currency";
 
 const CartItem = ({ item }) => {
@@ -24,11 +29,10 @@ const CartItem = ({ item }) => {
             {item.title}
           </h3>
 
-           {/* UNIT PRICE */}
+          {/* UNIT PRICE */}
           <p className="text-xs text-gray-500">
             {formatINR(convertToINR(item.price))}
           </p>
-
         </div>
       </div>
 
@@ -37,7 +41,10 @@ const CartItem = ({ item }) => {
         {/* Quantity */}
         <div className="flex items-center border border-gray-300 rounded-xl overflow-hidden">
           <button
-            onClick={() => dispatch(decreaseQty(item.id))}
+            onClick={() => {
+              dispatch(decreaseQty(item.id));
+              toast("Quantity updated");
+            }}
             className="px-3 py-1.5 hover:bg-gray-100 transition"
           >
             −
@@ -46,7 +53,10 @@ const CartItem = ({ item }) => {
           <span className="px-3 text-sm">{item.quantity}</span>
 
           <button
-            onClick={() => dispatch(increaseQty(item.id))}
+            onClick={() => {
+              dispatch(increaseQty(item.id));
+              toast.success("Quantity increased");
+            }}
             className="px-3 py-1.5 hover:bg-gray-100 transition"
           >
             +
@@ -60,12 +70,16 @@ const CartItem = ({ item }) => {
 
         {/* Remove */}
         <button
-          onClick={() => dispatch(removeFromCart(item.id))}
+          onClick={() => {
+            dispatch(removeFromCart(item.id));
+            toast("Removed from cart ❌");
+          }}
           className="text-gray-400 hover:text-red-500 transition text-lg"
         >
           ✕
         </button>
       </div>
+        
     </div>
   );
 };

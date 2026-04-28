@@ -46,11 +46,11 @@ const ProductFilters = () => {
   }, [debouncedSearch, category, sort, setParams]);
 
   return (
-    <div className="bg-white border border-gray-200 rounded-2xl p-4 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div className="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
 
   {/* 🔍 Search */}
   <div className="flex flex-col gap-1 w-full md:max-w-xs">
-    <label htmlFor="search" className="text-xs text-gray-500">
+    <label htmlFor="search" className="text-xs font-medium text-gray-500">
       Search
     </label>
 
@@ -60,15 +60,15 @@ const ProductFilters = () => {
       value={searchInput}
       onChange={(e) => setSearchInput(e.target.value)}
       placeholder="Search products..."
-      className="px-3 py-2 border border-gray-300 rounded-xl text-sm 
-                 focus:outline-none focus:ring-2 focus:ring-black focus:border-black 
+      className="px-3 py-2 rounded-xl text-sm bg-gray-50 border border-gray-200
+                 focus:outline-none focus:ring-2 focus:ring-black focus:bg-white
                  transition"
     />
   </div>
 
   {/* 🗂️ Category */}
   <div className="flex flex-col gap-1 w-full md:w-44">
-    <label htmlFor="category" className="text-xs text-gray-500">
+    <label htmlFor="category" className="text-xs font-medium text-gray-500">
       Category
     </label>
 
@@ -77,20 +77,21 @@ const ProductFilters = () => {
       name="category"
       value={category}
       onChange={(e) => dispatch(setCategory(e.target.value))}
-      className="px-3 py-2 border border-gray-300 rounded-xl text-sm 
-                 focus:outline-none focus:ring-2 focus:ring-black focus:border-black 
+      className="px-3 py-2 rounded-xl text-sm bg-gray-50 border border-gray-200
+                 focus:outline-none focus:ring-2 focus:ring-black focus:bg-white
                  transition"
     >
       <option value="all">All</option>
-      <option value="smartphones">Smartphones</option>
-      <option value="laptops">Laptops</option>
+      <option value="groceries">Food</option>
+      <option value="furniture">Furniture</option>
+      <option value="beauty">Makeup</option>
       <option value="fragrances">Fragrances</option>
     </select>
   </div>
 
   {/* 🔽 Sort */}
   <div className="flex flex-col gap-1 w-full md:w-44">
-    <label htmlFor="sort" className="text-xs text-gray-500">
+    <label htmlFor="sort" className="text-xs font-medium text-gray-500">
       Sort
     </label>
 
@@ -99,8 +100,8 @@ const ProductFilters = () => {
       name="sort"
       value={sort}
       onChange={(e) => dispatch(setSort(e.target.value))}
-      className="px-3 py-2 border border-gray-300 rounded-xl text-sm 
-                 focus:outline-none focus:ring-2 focus:ring-black focus:border-black 
+      className="px-3 py-2 rounded-xl text-sm bg-gray-50 border border-gray-200
+                 focus:outline-none focus:ring-2 focus:ring-black focus:bg-white
                  transition"
     >
       <option value="default">Default</option>
@@ -110,7 +111,6 @@ const ProductFilters = () => {
   </div>
 
 </div>
-  );
-};
-
+)
+}
 export default ProductFilters;

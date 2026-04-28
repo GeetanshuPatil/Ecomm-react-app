@@ -16,12 +16,17 @@ import Signup from "../features/auth/pages/Signup";
 import PaymentPortal from "../features/payments/pages/PaymentPortal";
 import OrderSuccess from "../features/orders/pages/orderSuccessful";
 import Wishlist from "../features/wishlist/pages/Wishlist";
+import HomePage from "../features/home/HomePage";
 
 const router = createBrowserRouter([
   {
     element: <Layout />, // 👈 parent layout
     children: [
-      { path: "/", element: <ProductList /> },
+      {
+        path: "/",
+        element: <HomePage />,
+      },
+      
       { path: "/product/:id", element: <ProductDetails /> },
 
       { path: "/login", element: <Login /> },
@@ -40,7 +45,7 @@ const router = createBrowserRouter([
         path: "/order-success",
         element: <OrderSuccess />,
       },
-      { path: "/wishlist", element: <Wishlist /> }
+      { path: "/wishlist", element: <Wishlist /> },
     ],
   },
 

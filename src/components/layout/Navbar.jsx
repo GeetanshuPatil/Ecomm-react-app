@@ -2,12 +2,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../features/auth/authSlice";
 import toast from "react-hot-toast";
 import { NavLink, Link, useNavigate } from "react-router-dom";
+import { Heart, ShoppingCart } from "lucide-react";
 
 const Navbar = () => {
   const { user, token } = useSelector((state) => state.auth);
 
- const cartItems = useSelector((state) => state.cart?.items || []);
-const wishlistItems = useSelector((state) => state.wishlist?.items || []);
+  const cartItems = useSelector((state) => state.cart?.items || []);
+  const wishlistItems = useSelector((state) => state.wishlist?.items || []);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -26,56 +27,59 @@ const wishlistItems = useSelector((state) => state.wishlist?.items || []);
           G-Mart
         </Link>
 
-        {/* Center Nav */}
+        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6 text-sm text-gray-600">
-          <NavLink
-            to="/"
-            className={({ isActive }) =>
-              isActive
-                ? "text-black font-medium"
-                : "text-gray-600 hover:text-black transition"
-            }
-          >
-            Home
-          </NavLink>
 
-          <div className="relative">
-            <NavLink
-              to="/wishlist"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-black font-medium"
-                  : "text-gray-600 hover:text-black transition"
-              }
-            >
-              Wishlist ❤️
-            </NavLink>
+  {/* Home */}
+  <NavLink to="/">Home</NavLink>
+
+  {/* Wishlist */}
+  <Link to="/wishlist" className="relative">
+    <Heart className="w-5 h-5" />
+
+    {wishlistItems.length > 0 && (
+      <span className="absolute -top-2 -right-2 text-xs bg-pink-500 text-white rounded-full px-1">
+        {wishlistItems.length}
+      </span>
+    )}
+  </Link>
+
+  {/* Cart */}
+  <Link to="/cart" className="relative">
+    <ShoppingCart className="w-5 h-5" />
+
+    {cartItems.length > 0 && (
+      <span className="absolute -top-2 -right-2 text-xs bg-black text-white rounded-full px-1">
+        {cartItems.length}
+      </span>
+    )}
+  </Link>
+
+</div>
+
+        {/* Mobile Nav */}
+        <div className="flex md:hidden items-center gap-4">
+          {/* ❤️ Wishlist */}
+          <Link to="/wishlist" className="relative">
+            <Heart className="w-5 h-5" />
 
             {wishlistItems.length > 0 && (
-              <span className="absolute -top-2 -right-3 text-xs bg-pink-500 text-white rounded-full px-1.5">
+              <span className="absolute -top-2 -right-2 text-xs bg-pink-500 text-white rounded-full px-1">
                 {wishlistItems.length}
               </span>
             )}
-          </div>
+          </Link>
 
-          <div className="relative">
-            <NavLink
-              to="/cart"
-              className={({ isActive }) =>
-                isActive
-                  ? "text-black font-medium"
-                  : "text-gray-600 hover:text-black transition"
-              }
-            >
-              Cart
-            </NavLink>
+          {/* 🛒 Cart */}
+          <Link to="/cart" className="relative">
+            <ShoppingCart className="w-5 h-5" />
 
             {cartItems.length > 0 && (
-              <span className="absolute -top-2 -right-3 text-xs bg-black text-white rounded-full px-1.5">
+              <span className="absolute -top-2 -right-2 text-xs bg-black text-white rounded-full px-1">
                 {cartItems.length}
               </span>
             )}
-          </div>
+          </Link>
         </div>
 
         {/* Right Section */}

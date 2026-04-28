@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { selectCartItems } from "../cartSelectors";
 import CartItem from "../components/CartItem";
 import CartSummary from "../components/CartSummary";
+import BackButton from "../../../shared/components/BackButton";
 
 const Cart = () => {
 const items = useSelector(selectCartItems) || [];
@@ -14,7 +15,8 @@ const items = useSelector(selectCartItems) || [];
 
   return (
     <div className="grid lg:grid-cols-3 gap-8">
-  
+  <div className="p-6">
+      <BackButton />
   {/* LEFT: Items */}
   <div className="lg:col-span-2 flex flex-col gap-4">
     {items.map((item) => (
@@ -27,6 +29,7 @@ const items = useSelector(selectCartItems) || [];
     <CartSummary />
   </div>
 
+</div>
 </div>
   );
 };
