@@ -17,7 +17,9 @@ const Layout = () => {
             background: "#111",
             color: "#fff",
             borderRadius: "12px",
+            
           },
+          duration: 1200,
         }}
       />
 

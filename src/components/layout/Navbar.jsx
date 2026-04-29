@@ -3,6 +3,8 @@ import { logout } from "../../features/auth/authSlice";
 import toast from "react-hot-toast";
 import { NavLink, Link, useNavigate } from "react-router-dom";
 import { Heart, ShoppingCart } from "lucide-react";
+import { clearCart } from "../../features/cart/cartSlice";
+import { clearWishlist } from "../../features/wishlist/wishlistSlice";
 
 const Navbar = () => {
   const { user, token } = useSelector((state) => state.auth);
@@ -15,7 +17,14 @@ const Navbar = () => {
 
   const handleLogout = () => {
     dispatch(logout());
-    toast("Logged out");
+    dispatch(clearCart());
+    dispatch(clearWishlist());
+
+    localStorage.removeItem("cart");
+    localStorage.removeItem("wishlist");
+    localStorage.removeItem("user");
+
+    toast.success("Logged out successfully");
     navigate("/login");
   };
 
@@ -29,33 +38,31 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6 text-sm text-gray-600">
+          {/* Home */}
+          <NavLink to="/">Home</NavLink>
 
-  {/* Home */}
-  <NavLink to="/">Home</NavLink>
+          {/* Wishlist */}
+          <Link to="/wishlist" className="relative">
+            <Heart className="w-5 h-5" />
 
-  {/* Wishlist */}
-  <Link to="/wishlist" className="relative">
-    <Heart className="w-5 h-5" />
+            {wishlistItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 text-xs bg-pink-500 text-white rounded-full px-1">
+                {wishlistItems.length}
+              </span>
+            )}
+          </Link>
 
-    {wishlistItems.length > 0 && (
-      <span className="absolute -top-2 -right-2 text-xs bg-pink-500 text-white rounded-full px-1">
-        {wishlistItems.length}
-      </span>
-    )}
-  </Link>
+          {/* Cart */}
+          <Link to="/cart" className="relative">
+            <ShoppingCart className="w-5 h-5" />
 
-  {/* Cart */}
-  <Link to="/cart" className="relative">
-    <ShoppingCart className="w-5 h-5" />
-
-    {cartItems.length > 0 && (
-      <span className="absolute -top-2 -right-2 text-xs bg-black text-white rounded-full px-1">
-        {cartItems.length}
-      </span>
-    )}
-  </Link>
-
-</div>
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 text-xs bg-black text-white rounded-full px-1">
+                {cartItems.length}
+              </span>
+            )}
+          </Link>
+        </div>
 
         {/* Mobile Nav */}
         <div className="flex md:hidden items-center gap-4">

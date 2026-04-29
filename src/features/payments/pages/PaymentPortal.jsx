@@ -4,6 +4,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { selectCartTotal } from "../../cart/cartSelectors";
 import { selectIsAuthenticated } from "../../auth/authSelectors";
 import BackButton from "../../../shared/components/BackButton";
+import { formatINR, convertToINR } from "../../../shared/utils/currency";
 
 const PaymentPortal = () => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
@@ -36,12 +37,12 @@ const PaymentPortal = () => {
 
         <div className="flex justify-between text-sm mb-2">
           <span>Subtotal</span>
-          <span>₹ {total}</span>
+          <span>{formatINR(convertToINR(total))}</span>
         </div>
 
         <div className="flex justify-between text-sm">
           <span>Total</span>
-          <span className="font-semibold">₹ {total}</span>
+          <span className="font-semibold">{formatINR(convertToINR(total))}</span>
         </div>
       </div>
 
